@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import CurrencyDisplay from './CurrencyDisplay'
 
-const withCurrency = (BaseComponent) => {
+const withCurrency = (BaseComponent) => 
     class Currency extends Component {
         state = {
             currencyChosen: false,
@@ -19,7 +19,7 @@ const withCurrency = (BaseComponent) => {
 
         handleOptionSelect = (e) => {
             const userValue = e.target.value
-            this.stetState(() => {
+            this.setState(() => {
                 return {
                     selectedCurrency: userValue,
                     currencyChosen: userValue === 'Select Currency' ? false : true
@@ -43,9 +43,9 @@ const withCurrency = (BaseComponent) => {
                 { name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41, id: 3 },
                 { name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01, id: 4 }
             ]
-            const mappedCurrency = currencyData.map((currency, index) => {
+            const mappedCurrency = currencyData.map((currency, index) => (
             <option key={currency.id} value={index}>{currency.name}</option>
-            })
+            ))
             return(
                 <div>
                     <select value={this.state.selectedCurrency} onChange={this.handleOptionSelect} >
@@ -61,15 +61,12 @@ const withCurrency = (BaseComponent) => {
                         amount={this.state.amount}
                     />) : (<p>Please Select a Currency</p>) }
 
-                    <BaseComponent
-                        currency={currencyData[this.state.selectedCurrency]}
-                        amount={this.state.amount}
-                    />
+                    
                 </div>
             )
         }
     }
-}
+
 
 const ExchangedCurrency = withCurrency(CurrencyDisplay)
 
